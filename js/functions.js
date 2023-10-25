@@ -1,6 +1,7 @@
 const checkStringLength = function (string, maxLength) {
   return string.length <= maxLength;
 };
+checkStringLength();
 
 const isPalindrom = function (string) {
   string = string.replaceAll(' ', '').toLowerCase();
@@ -10,6 +11,7 @@ const isPalindrom = function (string) {
   }
   return string === stringBackward;
 };
+isPalindrom();
 
 const getNumbers = function (string) {
   let numbers = '';
@@ -26,3 +28,4 @@ const getNumbers = function (string) {
   }
   return parseInt(numbers, 10);
 };
+getNumbers();
