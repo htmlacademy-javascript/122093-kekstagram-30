@@ -29,3 +29,13 @@ const getNumbers = function (string) {
   return parseInt(numbers, 10);
 };
 getNumbers();
+
+const getMeetingInWorkTime = function (workStart, workEnd, meetingTime, meetingDuration) {
+  const times = [workStart, workEnd, meetingTime];
+  for (let i = 0; i < times.length; i++) {
+    const time = times[i].split(':');
+    times[i] = +time[0] * 60 + +time[1];
+  }
+  return (times[2] >= times[0] && times[2] + meetingDuration <= times[1]);
+};
+window.console.log(getMeetingInWorkTime('08:00', '17:30', '14:00', 90));
