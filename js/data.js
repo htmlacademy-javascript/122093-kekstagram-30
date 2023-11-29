@@ -66,4 +66,6 @@ const getPhotoCards = function () {
   return Array.from({length: PUBLISHED_PHOTO_COUNT}, getPhotoCard);
 };
 
-export {getPhotoCards};
+const data = getPhotoCards();
+
+export {data};
