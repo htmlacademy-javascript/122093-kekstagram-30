@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomArrayElement, getRandomId, getRandomUrl, getRandomCommentId} from './util.js';
+import {getRandomInteger, getId} from './util.js';
 
 const COMMENTS = [
   'Всё отлично!',
@@ -39,26 +39,31 @@ const DESCRIPTIONS = [
 ];
 
 const PUBLISHED_PHOTO_COUNT = 25;
+const getCommentId = getId();
+const getUrl = getId();
+const getPhotoId = getId();
 
 const getComments = function() {
   return {
-    id: getRandomCommentId(),
+    id: getCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
-    name: getRandomArrayElement(NAMES)
+    message: COMMENTS[getRandomInteger(0, COMMENTS.length - 1)],
+    name: NAMES[getRandomInteger(0, NAMES.length - 1)]
   };
 };
 
-const publishPhoto = () => ({
-  id: getRandomId(),
-  url: `photos/${getRandomUrl()}.jpg`,
-  description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomInteger(15, 200),
-  comments: Array.from({length: getRandomInteger(0, 30)}, getComments)
-});
-
-const publishPhotos = function () {
-  return Array.from({length: PUBLISHED_PHOTO_COUNT}, publishPhoto);
+const getPhotoCard = function () {
+  return {
+    id: getPhotoId(),
+    url: `photos/${getUrl()}.jpg`,
+    description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
+    likes: getRandomInteger(15, 200),
+    comments: Array.from({length: getRandomInteger(0, 30)}, getComments)
+  };
 };
 
-export {publishPhotos};
+const getPhotoCards = function () {
+  return Array.from({length: PUBLISHED_PHOTO_COUNT}, getPhotoCard);
+};
+
+export {getPhotoCards};
