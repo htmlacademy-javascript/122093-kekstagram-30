@@ -1,3 +1,5 @@
-import { publishPhotos } from './data.js';
+import { getPhotoCards } from './data.js';
+import {renderPictures} from'./miniature.js';
 
-window.console.log(publishPhotos());
+const data = getPhotoCards();
+renderPictures(data);
