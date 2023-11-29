@@ -5,14 +5,6 @@ const getRandomInteger = function (a, b) {
   return Math.floor(result);
 };
 
-const getId = function () {
-  let previousId = 0;
-  return function () {
-    previousId++;
-    return previousId;
-  };
-};
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const debounce = (callback, timeoutDelay) => {
@@ -23,4 +15,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export {getRandomInteger, getId, isEscapeKey, debounce};
+export {getRandomInteger, isEscapeKey, debounce};
