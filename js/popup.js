@@ -21,6 +21,7 @@ const onDocumentKeydown = (evt) => {
     evt.preventDefault();
     body.classList.remove('modal-open');
     bigPicture.classList.add('hidden');
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
 
@@ -40,7 +41,7 @@ const onBigPictureButtonCloseClick = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const creatingCommentElements = (pictureData) => {
+const createCommentsElements = (pictureData) => {
   const comments = pictureData.comments;
 
   comments.forEach(({avatar, name, message}) => {
@@ -53,19 +54,19 @@ const creatingCommentElements = (pictureData) => {
   });
 };
 
-const FillBigPicture = ({url, likes, description, comments}) => {
+const fillBigPicture = ({url, likes, description, comments}) => {
   bigPicture.querySelector('.big-picture__img').querySelector('img').src = url;
-  bigPicture.querySelector('.social__likes').textContent = likes;
+  bigPicture.querySelector('.likes-count').textContent = likes;
   bigPicture.querySelector('.social__caption').textContent = description;
   bigPicture.querySelector('.social__comment-total-count').textContent = comments.length;
 };
 
 const renderCommentsBigPicture = () => {
   const maxCounter = socialCommentCounter + 5;
-  const elemetComment = arrayComents.slice(socialCommentCounter, maxCounter);
+  const commentElements = arrayComents.slice(socialCommentCounter, maxCounter);
 
-  elemetComment.forEach((_, i) => {
-    socialComments.append(elemetComment[i]);
+  commentElements.forEach((_, i) => {
+    socialComments.append(commentElements[i]);
     socialCommentCounter += 1;
   });
 
@@ -83,16 +84,18 @@ const onPicturesContainerClick = (event) =>{
 
   if (event.target.classList[0] === 'picture__img'){
     openBigPicture();
-    FillBigPicture(pictureData);
-    creatingCommentElements(pictureData);
+    fillBigPicture(pictureData);
+    createCommentsElements(pictureData);
     renderCommentsBigPicture();
   }
 };
 
+const onCommentsLoaderClick = () => {
+  renderCommentsBigPicture();
+};
+
 picturesContainer.addEventListener('click', onPicturesContainerClick);
-
 bigPictureButtonClose.addEventListener('click', onBigPictureButtonCloseClick);
-
-commentsLoader.addEventListener('click', renderCommentsBigPicture);
+commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
 export {getArrayPhotosPopup};

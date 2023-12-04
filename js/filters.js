@@ -17,15 +17,7 @@ const showImgFiltersSection = () => {
   imgFiltersSection.classList.remove('img-filters--inactive');
 };
 
-const compareComments = (photoA, photoB) => {
-  if (photoA.comments.length < photoB.comments.length) {
-    return 1;
-  }
-  if (photoA.comments.length > photoB.comments.length) {
-    return -1;
-  }
-  return 0;
-};
+const compareComments = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
 const sortUserImagesRandom = () => {
   const newArrayPhotos = [];
